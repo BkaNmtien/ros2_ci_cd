@@ -14,8 +14,8 @@ add_executable(string_publisher src/str_pub.cpp)
 ament_target_dependencies(string_publisher rclcpp std_msgs)
 
 install(TARGETS
- string_publisher
- DESTINATION lib/${PROJECT_NAME})
+  string_publisher
+  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

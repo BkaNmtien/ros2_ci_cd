@@ -5,7 +5,8 @@ using namespace std::chrono_literals;
 class StringPublisher : public rclcpp::Node
 {
 public:
-  StringPublisher() : Node("cicd_test")
+  StringPublisher() 
+  : Node("cicd_test")
   {
     _str_pub = this->create_publisher<std_msgs::msg::String>("topic", 10);
     _timer = this->create_wall_timer(500ms,
