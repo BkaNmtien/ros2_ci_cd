@@ -1,13 +1,16 @@
 name: ros2-pipeline-test
 
+# Chỉ chạy khi có push lên branch master
 on:
   push:
     branches: [ "master" ]
 
+# Run VM ảo chạy ubuntu
 jobs:
   build:
     runs-on: ubuntu-24.04
 
+    # Setup ros2, cài toàn bộ những thứ cần để biên dịch package
     steps:
     - run: |
         sudo apt update && sudo apt install -y curl gnupg lsb-release
@@ -18,18 +21,20 @@ jobs:
         sudo rosdep init
         rosdep update
 
+    # Clone repository đặt vào ros2_ci_cd
     - uses: actions/checkout@v3
       with:
-        path: ros2_ws/src/ros2_ci_cd
+        path: ros2_ci_cd/src/ros2_ci_cd
 
+    # Build step
     - run: |
         source /opt/ros/jazzy/setup.bash
-        cd ros2_ws
+        cd ros2_ci_cd
         rosdep install --from-paths src -y --ignore-src
         colcon build
 
     - run: |
         source /opt/ros/jazzy/setup.bash
-        cd ros2_ws
+        cd ros2_ci_cd
         colcon test
         colcon test-result --verbose
