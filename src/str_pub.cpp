@@ -19,8 +19,7 @@ private:
     msg.data = "CI/CD using ROS 2 and github actions";
     _str_pub->publish(msg);
   }
-  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr _str_
-      pub;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr _str_pub;
   rclcpp::TimerBase::SharedPtr _timer;
 };
 int main(int argc, char *argv[])
